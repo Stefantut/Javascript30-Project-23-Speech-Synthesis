@@ -27,6 +27,7 @@
       <textarea name="text">Hello! I love JavaScript 👍</textarea>
       <button id="stop">Stop!</button>
       <button id="speak">Speak</button>
+      <button class="pause-resume">⏯️ Pause</button>
     </div>
 
     <script>
@@ -39,6 +40,7 @@
       const speakButton = document.querySelector("#speak");
       const stopButton = document.querySelector("#stop");
       msg.text = document.querySelector("[name=text]").value;
+      const pauseResume = document.querySelector(".pause-resume");
 
       function populateVoices() {
         voices = this.getVoices();
@@ -70,6 +72,23 @@
         msg[this.name] = this.value;
         toggle();
       }
+
+      let isPlaying = true;
+
+      function togglePlayPause() {
+        const pause = speechSynthesis.pause();
+        pauseResume.textContent = "▶️ Resume";
+        if (isPlaying) {
+          const pause = speechSynthesis.pause();
+          pauseResume.textContent = "▶️ Resume";
+        } else {
+          const resume = speechSynthesis.resume();
+          pauseResume.textContent = "⏸️ Pause";
+        }
+        isPlaying = !isPlaying;
+      }
+
+      pauseResume.addEventListener("click", togglePlayPause);
 
       speechSynthesis.addEventListener("voiceschanged", populateVoices);
       voicesDropdown.addEventListener("change", setVoice);
