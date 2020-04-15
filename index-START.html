@@ -28,6 +28,7 @@
       <button id="stop">Stop!</button>
       <button id="speak">Speak</button>
       <button class="pause-resume">⏯️ Pause</button>
+      <button class="reset">🔥 Reset</button>
     </div>
 
     <script>
@@ -40,7 +41,9 @@
       const speakButton = document.querySelector("#speak");
       const stopButton = document.querySelector("#stop");
       msg.text = document.querySelector("[name=text]").value;
+
       const pauseResume = document.querySelector(".pause-resume");
+      const reset = document.querySelector(".reset");
 
       function populateVoices() {
         voices = this.getVoices();
@@ -89,6 +92,15 @@
       }
 
       pauseResume.addEventListener("click", togglePlayPause);
+      function resetValues() {
+        options.forEach((option) => {
+          option.value = "";
+        });
+
+        voicesDropdown.selectedIndex = 0;
+        toggle();
+      }
+      reset.addEventListener("click", resetValues);
 
       speechSynthesis.addEventListener("voiceschanged", populateVoices);
       voicesDropdown.addEventListener("change", setVoice);
