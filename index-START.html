@@ -91,7 +91,6 @@
         isPlaying = !isPlaying;
       }
 
-      pauseResume.addEventListener("click", togglePlayPause);
       function resetValues() {
         options.forEach((option) => {
           option.value = "";
@@ -100,7 +99,9 @@
         voicesDropdown.selectedIndex = 0;
         toggle();
       }
+
       reset.addEventListener("click", resetValues);
+      pauseResume.addEventListener("click", togglePlayPause);
 
       speechSynthesis.addEventListener("voiceschanged", populateVoices);
       voicesDropdown.addEventListener("change", setVoice);
